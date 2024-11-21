@@ -1,28 +1,10 @@
 import java.util.*;
+import java.awt.geom.*;
 
 public class Problem_1 {
 
     public static void main(String[] args) {
 
-
-    }
-
-}
-
-class Point2D {
-
-    private double x;
-    private double y;
-
-    public double get_x() {
-
-        return this.x;
-
-    }
-
-    public double get_y() {
-
-        return this.y;
 
     }
 
@@ -58,14 +40,14 @@ class Line {
 
     public String to_string() {
 
-        String str = "X1: " + this.point_1.get_x() + ", Y1: " + this.point_1.get_y() + ", X2: " + this.point_2.get_x() + ", " + this.point_2.get_y();
+        String str = "X1: " + this.point_1.getX() + ", Y1: " + this.point_1.getY() + ", X2: " + this.point_2.getX() + ", " + this.point_2.getY();
         return str;
 
     }
 
     public double find_slope() {
 
-        double slope = (this.point_1.get_y() - this.point_2.get_y()) / (this.point_1.get_x() - this.point_2.get_x());
+        double slope = (this.point_1.getY() - this.point_2.getY()) / (this.point_1.getX() - this.point_2.getX());
         return slope;
 
     }

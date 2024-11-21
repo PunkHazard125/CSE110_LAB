@@ -1,4 +1,5 @@
 import java.util.*;
+import java.awt.geom.*;
 
 public class Problem_2 {
 
@@ -43,37 +44,36 @@ public class Problem_2 {
 
 }
 
-class Circle2D extends Point2D{
+class Circle2D {
 
-    private double x;
-    private double y;
+    private Point2D center;
     private double radius;
 
     Circle2D() {
 
-        this.x = 0;
-        this.y = 0;
+        this.center = new Point2D.Double();
+        this.center.setLocation(0, 0);
         this.radius = 1.0;
 
     }
 
     Circle2D(double x, double y, double r) {
 
-        this.x = x;
-        this.y = y;
+        this.center = new Point2D.Double();
+        this.center.setLocation(x, y);
         this.radius = r;
 
     }
 
     public double get_x() {
 
-        return this.x;
+        return this.center.getX();
 
     }
 
     public double get_y() {
 
-        return this.y;
+        return this.center.getY();
 
     }
 

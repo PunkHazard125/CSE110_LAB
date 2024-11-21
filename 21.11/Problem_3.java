@@ -33,6 +33,7 @@ public class Problem_3 {
         System.out.println("\nReversed Queue: ");
         queue_1.reverse_queue();
         queue_1.print_queue();
+        System.out.println();
 
         scanner.close();
 
