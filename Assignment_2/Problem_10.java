@@ -1,19 +1,20 @@
 import java.util.*;
+import java.awt.geom.*;
 
 public class Problem_10 {
 
     public static void main(String[] args) {
-        
+
         Scanner scanner = new Scanner(System.in);
 
         Circle2D c1 = new Circle2D(2, 2, 5.5);
-        
+
         System.out.printf("Area of C1: %.2f\n", c1.get_area());
         System.out.printf("Perimeter of C1: %.2f\n", c1.get_perimeter());
-        
+
         if (c1.contains(3, 3))
         {
-            System.out.println("C1 contains the point");    
+            System.out.println("C1 contains the point");
         }
         else
         {
@@ -22,7 +23,7 @@ public class Problem_10 {
 
         if (c1.contains(new Circle2D(4, 5, 10.5)))
         {
-            System.out.println("C1 contains the circle");    
+            System.out.println("C1 contains the circle");
         }
         else
         {
@@ -31,7 +32,7 @@ public class Problem_10 {
 
         if (c1.overlaps(new Circle2D(3, 5, 2.3)))
         {
-            System.out.println("The circles overlap");    
+            System.out.println("The circles overlap");
         }
         else
         {
@@ -40,40 +41,39 @@ public class Problem_10 {
 
         scanner.close();
     }
-    
+
 }
 
 class Circle2D {
 
-    private double x;
-    private double y;
+    private Point2D center;
     private double radius;
 
     Circle2D() {
 
-        this.x = 0;
-        this.y = 0;
+        this.center = new Point2D.Double();
+        this.center.setLocation(0, 0);
         this.radius = 1.0;
 
     }
 
     Circle2D(double x, double y, double r) {
 
-        this.x = x;
-        this.y = y;
+        this.center = new Point2D.Double();
+        this.center.setLocation(x, y);
         this.radius = r;
 
     }
 
     public double get_x() {
 
-        return this.x;
+        return this.center.getX();
 
     }
 
     public double get_y() {
 
-        return this.y;
+        return this.center.getY();
 
     }
 
@@ -127,7 +127,7 @@ class Circle2D {
 
         if (Math.abs(this.get_radius() - circle.get_radius()) <= distance || this.radius + circle.get_radius() >= distance)
         {
-            return true;    
+            return true;
         }
         else
         {

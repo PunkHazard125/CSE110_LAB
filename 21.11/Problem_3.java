@@ -6,12 +6,12 @@ public class Problem_3 {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter size of Queue: ");
+        System.out.print("\nEnter size of Queue: ");
         int size = scanner.nextInt();
 
         Queue queue_1 = new Queue(size);
 
-        System.out.println("Enter elements of the Queue: ");
+        System.out.println("\nEnter elements of the Queue: ");
         for (int i = 0; i < size; i++) {
 
             queue_1.enqueue(scanner.nextInt());
@@ -51,6 +51,8 @@ class Queue {
 
     public Queue() {
 
+        this.list_of_elements = new ArrayList<>();
+
     }
 
     public Queue(int size) {
@@ -68,8 +70,8 @@ class Queue {
 
         }
 
-        this.front = this.list_of_elements.getFirst();
-        this.rear = this.list_of_elements.getLast();
+        this.front = this.list_of_elements.get(0);
+        this.rear = this.list_of_elements.get(this.list_of_elements.size() - 1);
         this.size = this.list_of_elements.size();
 
     }
@@ -77,41 +79,28 @@ class Queue {
     public void enqueue(int num) {
 
         this.list_of_elements.add(num);
-        this.front = this.list_of_elements.getFirst();
-        this.rear = this.list_of_elements.getLast();
+        this.size++;
+        this.rear = this.list_of_elements.get(this.list_of_elements.size() - 1);
 
     }
 
     public void dequeue() {
 
-        this.list_of_elements.removeFirst();
-        this.front = this.list_of_elements.getFirst();
-        this.rear = this.list_of_elements.getLast();
+        this.list_of_elements.remove(0);
+        this.size--;
+        this.front = this.list_of_elements.get(0);
 
     }
 
     public int peek() {
 
-        return this.list_of_elements.getFirst();
+        return this.list_of_elements.get(0);
 
     }
 
     public boolean is_empty() {
 
         return this.list_of_elements.isEmpty();
-
-    }
-
-    public boolean is_full() {
-
-        if (this.get_size() == this.list_of_elements.size())
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
 
     }
 
@@ -164,15 +153,7 @@ class Queue {
 
     public void reverse_queue() {
 
-        ArrayList<Integer> temp_list = new ArrayList<>(this.list_of_elements.size());
-        copy_list(this.list_of_elements, temp_list);
-        this.list_of_elements.clear();
-
-        for(int i = temp_list.size() - 1; i >= 0; i--) {
-
-            this.list_of_elements.add(temp_list.get(i));
-
-        }
+        Collections.reverse(this.list_of_elements);
 
     }
 
