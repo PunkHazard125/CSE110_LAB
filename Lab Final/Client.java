@@ -5,28 +5,28 @@ public class Client {
 
     public static void main(String[] args) {
 
-        try (Socket socket = new Socket("localhost", 12345);
-             BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
-             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) 
-            
-            {
-
-            System.out.println("Connected to the server. Type your messages:\n");
+        try
+        (
+            Socket socket = new Socket("localhost", 12345);
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
+        )
+        {
+            System.out.println("Connected to the server. Type your messsages: \n");
 
             String message;
 
-            while ((message = consoleReader.readLine()) != null) 
+            while ((message = consoleReader.readLine()) != null)
             {
-                if (message.equalsIgnoreCase("exit")) 
+                if (message.equalsIgnoreCase("Exit"))
                 {
-                    System.out.println("Exiting the program. Goodbye!");
-                    break;
+                    System.out.println("Exiting the program!");
+                    break;    
                 }
                 
-                sendMessage(message, out, in);
+                sendMessage(message, in, out);   
             }
-
         } 
         catch (IOException ex) 
         {
@@ -35,12 +35,12 @@ public class Client {
 
     }
 
-    public static void sendMessage(String message, PrintWriter out, BufferedReader in) throws IOException {
+    public static void sendMessage(String message, BufferedReader in, PrintWriter out) throws IOException {
 
         out.println(message);
         String response = in.readLine();
-        System.out.println("Server response: " + response);
-        
+        System.out.println("Server Response: " + response);
+
     }
 
 }
