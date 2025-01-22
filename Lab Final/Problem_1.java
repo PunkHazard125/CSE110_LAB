@@ -20,9 +20,9 @@ public class Problem_1 {
             {
                 user.join();
             } 
-            catch (InterruptedException e) 
+            catch (InterruptedException ex) 
             {
-                e.printStackTrace();
+                ex.printStackTrace();
             }
         }
 
