@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.concurrent.*;
 import java.io.*;
 import java.math.*;
 import java.net.*;
@@ -13,25 +14,16 @@ public class Threading_4 {
 
         BankAccount account = new BankAccount(0.00);
 
-        Thread[] users = new Thread[10];
+        ExecutorService executor = Executors.newFixedThreadPool(5);
 
-        for (int i = 0; i < users.length; i++) 
+        for (int i = 0; i < 10; i++) 
         {
-            users[i] = new User(account, "User-" + (i + 1));
-            users[i].start();    
+            executor.submit(new User(account)); 
         }
 
-        try 
-        {
-            for (int i = 0; i < users.length; i++) 
-            {
-                users[i].join();   
-            }
-        } 
-        catch (InterruptedException ex) 
-        {
-            ex.printStackTrace();
-        }
+        executor.shutdown();
+
+        while (!executor.isTerminated()) { }
 
         System.out.println("\nFinal balance: " + account.getBalance());
 
@@ -85,14 +77,13 @@ class BankAccount {
 
 }
 
-class User extends Thread {
+class User implements Runnable {
 
     private final BankAccount account;
     private static final Random random = new Random();
 
-    public User(BankAccount account, String name) {
+    public User(BankAccount account) {
 
-        super(name);
         this.account = account;
 
     }

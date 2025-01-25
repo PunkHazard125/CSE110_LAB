@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.concurrent.*;
 import java.io.*;
 import java.math.*;
 import java.net.*;
@@ -13,28 +14,15 @@ public class Threading_2 {
 
         BkashAccount account = new BkashAccount();
 
-        Thread[] agents = new Thread[3];
+        ExecutorService executors = Executors.newCachedThreadPool();
 
-        agents[0] = new Thread(() -> account.deposit(5000));
-        agents[1] = new Thread(() -> account.deposit(2000));
-        agents[2] = new Thread(() -> account.deposit(1000));
-        
-        for (int i = 0; i < agents.length; i++) 
-        {
-            agents[i].start();    
-        }
+        executors.submit(new Thread(() -> account.deposit(5000)));
+        executors.submit(new Thread(() -> account.deposit(2000)));
+        executors.submit(new Thread(() -> account.deposit(1000)));
 
-        try 
-        {
-            for (int i = 0; i < agents.length; i++) 
-            {
-                agents[i].join();    
-            }
-        } 
-        catch (InterruptedException ex) 
-        {
-            ex.printStackTrace();
-        }
+        executors.shutdown();
+
+        while (!executors.isTerminated()) { }
 
         System.out.println("Balance: " + account.getBalance());
 
